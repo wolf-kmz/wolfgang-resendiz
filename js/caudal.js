@@ -1,5 +1,4 @@
-import { crearCalculadora } from "./units.js";
-
+// crearCalculadora viene de units.js (cargado antes en el HTML).
 // La calculadora solo DECLARA qué magnitudes usa y cómo calcula.
 // El motor arma la barra de unidades y hace todas las conversiones.
 crearCalculadora({

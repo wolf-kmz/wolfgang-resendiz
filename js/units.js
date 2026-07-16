@@ -9,8 +9,11 @@
 // Para agregar una magnitud nueva (p. ej. volumen) basta con
 // añadir una entrada aquí abajo: la barra la mostrará sola.
 
+// Se envuelve en una IIFE y se expone en window para que funcione
+// también al abrir el HTML directamente (file://), sin servidor.
+(function () {
 // factor = cuánto vale 1 unidad expresada en la unidad base.
-export const MAGNITUDES = {
+const MAGNITUDES = {
   longitud:  { base: "m",    unidades: { mm: 0.001, cm: 0.01, m: 1, in: 0.0254, ft: 0.3048 } },
   velocidad: { base: "m/s",  unidades: { "m/s": 1, "km/h": 1 / 3.6, "ft/s": 0.3048, mph: 0.44704 } },
   caudal:    { base: "m³/s", unidades: { "L/s": 0.001, "m³/h": 1 / 3600, "m³/s": 1, gpm: 6.30902e-5 } },
@@ -18,8 +21,8 @@ export const MAGNITUDES = {
 };
 
 // Conversiones entre unidad elegida y unidad base.
-export const aBase     = (valor, magnitud, unidad) => valor * MAGNITUDES[magnitud].unidades[unidad];
-export const desdeBase = (valor, magnitud, unidad) => valor / MAGNITUDES[magnitud].unidades[unidad];
+const aBase     = (valor, magnitud, unidad) => valor * MAGNITUDES[magnitud].unidades[unidad];
+const desdeBase = (valor, magnitud, unidad) => valor / MAGNITUDES[magnitud].unidades[unidad];
 
 // ---- Preferencias del usuario (se recuerdan entre calculadoras) ----
 const CLAVE = "unidades-preferidas";
@@ -105,7 +108,7 @@ function construirBarra(magnitudes, unidadActual, alCambiar) {
 //    // recibe las entradas YA en unidad base y devuelve las salidas en unidad base
 //    calcular(entradasEnBase) { return { clave: valorEnBase }; },
 //  }
-export function crearCalculadora(config) {
+function crearCalculadora(config) {
   const form = document.querySelector(config.form);
   const salida = document.querySelector(config.resultado);
   const prefs = leerPrefs();
@@ -175,3 +178,8 @@ export function crearCalculadora(config) {
     recalcular({ silencioso: false });
   });
 }
+
+// Expuesto globalmente para las calculadoras.
+window.crearCalculadora = crearCalculadora;
+window.UNIDADES = { MAGNITUDES, aBase, desdeBase };
+})();
