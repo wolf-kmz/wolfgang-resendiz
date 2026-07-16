@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Ajuste para celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculadora de caudal en tuberías | Wolfgang Reséndiz</title>
+
+  <!-- Descripción para buscadores -->
+  <meta
+    name="description"
+    content="Calcula el caudal en litros por segundo a partir del diámetro de una tubería y la velocidad del agua."
+  >
+
+  <!-- ../ sube una carpeta -->
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- defer espera a que cargue el HTML -->
+  <script src="../js/caudal.js" defer></script>
+</head>
+
+<body>
+  <main>
+    <a class="back" href="../index.html">← Volver</a>
+
+    <h1>Calculadora de caudal en tuberías</h1>
+
+    <!-- Formulario de cálculo -->
+    <form id="caudal-form">
+      <label for="diametro">Diámetro (mm)</label>
+
+      <input
+        id="diametro"
+        name="diametro"
+        type="number"
+        min="0"
+        step="any"
+        inputmode="decimal"
+        required
+      >
+
+      <label for="velocidad">Velocidad (m/s)</label>
+
+      <input
+        id="velocidad"
+        name="velocidad"
+        type="number"
+        min="0"
+        step="any"
+        inputmode="decimal"
+        required
+      >
+
+      <button type="submit">Calcular</button>
+    </form>
+
+    <!-- Resultado -->
+    <p id="resultado" aria-live="polite"></p>
+  </main>
+</body>
+</html>
