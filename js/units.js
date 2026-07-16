@@ -55,6 +55,25 @@ const formatear = (v) => {
   return v.toFixed(decimales);
 };
 
+// ---- Estado colapsado de la barra (se recuerda) ----
+const CLAVE_COLAPSO = "unidades-barra-colapsada";
+
+const leerColapso = () => {
+  try {
+    return localStorage.getItem(CLAVE_COLAPSO);
+  } catch {
+    return null;
+  }
+};
+
+const guardarColapso = (colapsada) => {
+  try {
+    localStorage.setItem(CLAVE_COLAPSO, colapsada ? "1" : "0");
+  } catch {
+    /* sin almacenamiento: se ignora */
+  }
+};
+
 // ---- Barra inferior de unidades (se arma sola con las magnitudes) ----
 function construirBarra(magnitudes, unidadActual, alCambiar) {
   const barra = document.createElement("div");
@@ -62,10 +81,18 @@ function construirBarra(magnitudes, unidadActual, alCambiar) {
   barra.setAttribute("role", "group");
   barra.setAttribute("aria-label", "Unidades");
 
-  const titulo = document.createElement("span");
-  titulo.className = "unit-bar__titulo";
-  titulo.textContent = "Unidades";
-  barra.appendChild(titulo);
+  // Botón para minimizar / expandir la barra.
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "unit-bar__toggle";
+  toggle.innerHTML =
+    '<span class="unit-bar__icon" aria-hidden="true">&#9881;</span>' +
+    '<span class="unit-bar__label">Unidades</span>';
+  barra.appendChild(toggle);
+
+  // Contenedor de los selectores.
+  const items = document.createElement("div");
+  items.className = "unit-bar__items";
 
   for (const magnitud of magnitudes) {
     const item = document.createElement("label");
@@ -86,8 +113,29 @@ function construirBarra(magnitudes, unidadActual, alCambiar) {
     select.addEventListener("change", () => alCambiar(magnitud, select.value));
 
     item.appendChild(select);
-    barra.appendChild(item);
+    items.appendChild(item);
   }
+
+  barra.appendChild(items);
+
+  // Estado inicial: en móvil arranca minimizada si no hay preferencia previa.
+  const guardado = leerColapso();
+  let colapsada =
+    guardado === null
+      ? window.matchMedia("(max-width: 560px)").matches
+      : guardado === "1";
+
+  const aplicar = () => {
+    barra.dataset.colapsada = colapsada ? "true" : "false";
+    toggle.setAttribute("aria-expanded", String(!colapsada));
+  };
+  aplicar();
+
+  toggle.addEventListener("click", () => {
+    colapsada = !colapsada;
+    guardarColapso(colapsada);
+    aplicar();
+  });
 
   return barra;
 }

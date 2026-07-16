@@ -209,27 +209,60 @@ button:active {
   transform: translateX(-50%);
   z-index: 50;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 8px 18px;
-  max-width: calc(100% - 32px);
-  padding: 12px 20px;
+  gap: 10px;
+  max-width: calc(100% - 24px);
+  padding: 8px;
   background: var(--surface);
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: 999px;
   box-shadow: var(--shadow);
-  overflow-x: auto;
 }
 
-.unit-bar__titulo {
-  font-size: 0.75rem;
+/* Botón minimizar / expandir */
+.unit-bar__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 0.85rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted);
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.unit-bar__toggle:hover {
+  border-color: var(--accent);
+}
+
+.unit-bar__icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Contenedor de los selectores */
+.unit-bar__items {
+  display: flex;
+  align-items: center;
+  gap: 8px 16px;
+  overflow-x: auto;
+  padding-right: 6px;
+}
+
+/* Minimizada: solo se ve el botón */
+.unit-bar[data-colapsada="true"] .unit-bar__items {
+  display: none;
 }
 
 .unit-bar__item {
@@ -259,4 +292,51 @@ button:active {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* ---- Móvil: barra ancha abajo, unidades en columna, sin recortes ---- */
+@media (max-width: 560px) {
+  .unit-bar {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    transform: none;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px;
+    border-radius: 18px;
+  }
+
+  .unit-bar__toggle {
+    justify-content: center;
+  }
+
+  .unit-bar__items {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 10px;
+    padding-right: 0;
+    overflow-x: visible;
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+
+  .unit-bar__item {
+    justify-content: space-between;
+    font-size: 1rem;
+  }
+
+  .unit-bar select {
+    min-height: 40px;
+  }
+
+  /* Minimizada en móvil: se encoge a una esquina en vez de ocupar todo el ancho */
+  .unit-bar[data-colapsada="true"] {
+    left: auto;
+    right: 12px;
+    border-radius: 999px;
+  }
 }
