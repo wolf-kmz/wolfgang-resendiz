@@ -1,0 +1,202 @@
+/* Variables de color y diseño */
+:root {
+  --bg: #f6f7fb;
+  --bg-gradient: radial-gradient(1200px 600px at 50% -10%, #eef1ff 0%, var(--bg) 55%);
+  --surface: #ffffff;
+  --text: #1a1c22;
+  --muted: #6b7280;
+  --border: #e6e8ef;
+  --accent: #4f46e5;
+  --accent-soft: #eef0ff;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --shadow-hover: 0 4px 8px rgba(16, 24, 40, 0.06), 0 16px 40px rgba(79, 70, 229, 0.12);
+  --radius: 16px;
+}
+
+/* Modo oscuro automático */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0f16;
+    --bg-gradient: radial-gradient(1200px 600px at 50% -10%, #1a1d2e 0%, var(--bg) 55%);
+    --surface: #161925;
+    --text: #f2f3f7;
+    --muted: #9aa1b1;
+    --border: #262a3a;
+    --accent: #818cf8;
+    --accent-soft: #1e2135;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.3), 0 16px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Incluye bordes en el tamaño */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 48px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg-gradient), var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Contenedor centrado */
+main {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Títulos */
+h1 {
+  margin: 0 0 28px;
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Lista de enlaces */
+nav {
+  display: grid;
+  gap: 14px;
+}
+
+a {
+  color: var(--accent);
+}
+
+/* Enlace tipo tarjeta */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 22px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.card::after {
+  content: "→";
+  margin-left: auto;
+  color: var(--accent);
+  font-weight: 600;
+  transition: transform 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+
+.card:hover::after {
+  transform: translateX(4px);
+}
+
+.card:active {
+  transform: translateY(0);
+}
+
+/* Enlace de regreso */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 28px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.18s ease;
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+/* Tarjeta que envuelve el formulario */
+form {
+  display: grid;
+  gap: 14px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input,
+button {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  font: inherit;
+  border-radius: 12px;
+}
+
+input {
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+button {
+  margin-top: 8px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  cursor: pointer;
+  transition: filter 0.18s ease, transform 0.1s ease;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+/* Espacio para el resultado */
+#resultado {
+  min-height: 24px;
+  margin-top: 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent);
+}
