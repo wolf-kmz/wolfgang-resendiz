@@ -25,7 +25,8 @@
   <!-- ../ sube una carpeta -->
   <link rel="stylesheet" href="../css/styles.css">
 
-  <!-- defer espera a que cargue el HTML -->
+  <!-- defer espera al HTML y respeta el orden: primero el motor, luego la calculadora -->
+  <script src="../js/units.js" defer></script>
   <script src="../js/caudal.js" defer></script>
 </head>
 
@@ -37,7 +38,7 @@
 
     <!-- Formulario de cálculo -->
     <form id="caudal-form">
-      <label for="diametro">Diámetro (mm)</label>
+      <label for="diametro">Diámetro</label>
 
       <input
         id="diametro"
@@ -49,7 +50,7 @@
         required
       >
 
-      <label for="velocidad">Velocidad (m/s)</label>
+      <label for="velocidad">Velocidad</label>
 
       <input
         id="velocidad"

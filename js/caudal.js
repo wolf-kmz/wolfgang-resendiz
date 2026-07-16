@@ -1,35 +1,25 @@
-// Elementos del HTML
-const form = document.querySelector("#caudal-form");
-const resultado = document.querySelector("#resultado");
+// crearCalculadora viene de units.js (cargado antes en el HTML).
+// La calculadora solo DECLARA qué magnitudes usa y cómo calcula.
+// El motor arma la barra de unidades y hace todas las conversiones.
+crearCalculadora({
+  form: "#caudal-form",
+  resultado: "#resultado",
 
-// Se ejecuta al enviar el formulario
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+  // Entradas: cada campo dice su magnitud (positivo => debe ser > 0).
+  entradas: {
+    diametro: { magnitud: "longitud", positivo: true },
+    velocidad: { magnitud: "velocidad" },
+  },
 
-  // Lee los valores
-  const diametroMm = Number(form.diametro.value);
-  const velocidad = Number(form.velocidad.value);
+  // Salidas: qué devuelve y con qué etiqueta.
+  salidas: {
+    caudal: { magnitud: "caudal", etiqueta: "Caudal" },
+  },
 
-  // Valida los datos
-  if (
-    !Number.isFinite(diametroMm) ||
-    !Number.isFinite(velocidad) ||
-    diametroMm <= 0 ||
-    velocidad < 0
-  ) {
-    resultado.textContent = "Ingresa valores válidos.";
-    return;
-  }
-
-  // Convierte milímetros a metros
-  const diametroM = diametroMm / 1000;
-
-  // Q = A × v
-  const area = Math.PI * diametroM ** 2 / 4;
-
-  // Convierte m³/s a L/s
-  const caudalLps = area * velocidad * 1000;
-
-  // Muestra el resultado
-  resultado.textContent = `Caudal: ${caudalLps.toFixed(2)} L/s`;
+  // Recibe las entradas YA en unidad base (SI) y devuelve la salida en base.
+  calcular({ diametro, velocidad }) {
+    // Q = A × v   (diámetro y velocidad ya vienen en metros y m/s)
+    const area = (Math.PI * diametro ** 2) / 4;
+    return { caudal: area * velocidad };
+  },
 });
