@@ -22,4 +22,12 @@ crearCalculadora({
     const area = (Math.PI * diametro ** 2) / 4;
     return { caudal: area * velocidad };
   },
+
+  // Tras cada cálculo válido: dibuja la gráfica velocidad–caudal.
+  // Todo llega en base (SI): diámetro en m, velocidad en m/s, caudal en m³/s.
+  alCalcular({ diametro, velocidad }, { caudal }) {
+    if (window.dibujarGraficaCaudal) {
+      window.dibujarGraficaCaudal(diametro, velocidad, caudal);
+    }
+  },
 });
