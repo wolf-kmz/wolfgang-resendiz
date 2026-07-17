@@ -48,6 +48,22 @@ const guardarPref = (magnitud, unidad) => {
 // ---- Utilidades ----
 const capitalizar = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
+// Renderiza en LaTeX (con KaTeX) cualquier elemento con data-latex.
+// Si KaTeX no cargó, se conserva el texto de respaldo del elemento.
+function renderarMatematicas() {
+  if (!window.katex) return;
+  document.querySelectorAll("[data-latex]").forEach((el) => {
+    try {
+      window.katex.render(el.dataset.latex, el, {
+        throwOnError: false,
+        displayMode: el.hasAttribute("data-display"),
+      });
+    } catch {
+      /* si algo falla, se queda el texto de respaldo */
+    }
+  });
+}
+
 const formatear = (v) => {
   if (!Number.isFinite(v)) return "—";
   const abs = Math.abs(v);
@@ -180,6 +196,9 @@ function crearCalculadora(config) {
   }
 
   let yaCalculado = false;
+
+  // Ecuaciones en LaTeX (si KaTeX está disponible).
+  renderarMatematicas();
 
   // Actualiza los indicadores de unidad junto a los inputs.
   // Cualquier elemento con data-unidad="<magnitud>" muestra su unidad actual.

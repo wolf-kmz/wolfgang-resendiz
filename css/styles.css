@@ -241,6 +241,11 @@ var {
   font-size: 0.7em;
 }
 
+/* Quita el margen extra que KaTeX añade en modo display */
+.info__ecuacion .katex-display {
+  margin: 0;
+}
+
 input,
 button {
   width: 100%;
