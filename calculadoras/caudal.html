@@ -104,8 +104,25 @@
       <h2 class="grafica__titulo">Velocidad vs Caudal</h2>
       <p class="grafica__sub">
         Relación Q–V para el diámetro indicado, con los límites normativos.
+        Pasa el cursor para ver valores; arrastra el punto azul o usa el
+        control para mover la velocidad.
       </p>
       <div id="grafica-lienzo" class="grafica__lienzo"></div>
+
+      <!-- Control interactivo: mueve la velocidad y actualiza todo en vivo -->
+      <div class="grafica__control">
+        <label for="v-slider">Velocidad V</label>
+        <input
+          id="v-slider"
+          type="range"
+          min="0"
+          max="6"
+          step="0.01"
+          value="0"
+          aria-describedby="v-slider-val"
+        >
+        <output id="v-slider-val" for="v-slider">0.00 m/s</output>
+      </div>
     </section>
 
     <!-- Leyenda y notas técnicas -->
