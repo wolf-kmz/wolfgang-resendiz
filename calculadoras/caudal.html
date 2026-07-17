@@ -25,7 +25,14 @@
   <!-- ../ sube una carpeta -->
   <link rel="stylesheet" href="../css/styles.css">
 
-  <!-- defer espera al HTML y respeta el orden: primero el motor, luego la calculadora -->
+  <!-- KaTeX: renderiza las ecuaciones escritas en LaTeX -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+  >
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
+
+  <!-- defer espera al HTML y respeta el orden: KaTeX, motor y luego la calculadora -->
   <script src="../js/units.js" defer></script>
   <script src="../js/caudal.js" defer></script>
 </head>
@@ -47,8 +54,9 @@
         Calcula el caudal volumétrico <var>Q</var> de una tubería a partir de su
         diámetro interior <var>d</var> y la velocidad media del fluido <var>v</var>.
       </p>
-      <p class="info__ecuacion">
-        <var>Q</var> = (π ∕ 4) · <var>d</var><sup>2</sup> · <var>v</var>
+      <!-- data-latex lo renderiza KaTeX; el texto es el respaldo si no carga -->
+      <p class="info__ecuacion" data-latex="Q = \dfrac{\pi}{4}\, d^{2}\, v" data-display>
+        Q = (π ∕ 4) · d² · v
       </p>
     </section>
 
