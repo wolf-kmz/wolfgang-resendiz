@@ -296,6 +296,127 @@ button:active {
   color: var(--accent);
 }
 
+/* La gráfica y las notas se ensanchan más allá de la columna del formulario
+   (que es angosta) y se centran respecto a la ventana. */
+.grafica,
+.notas {
+  width: min(94vw, 720px);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---- Gráfica velocidad–caudal (siempre en tema claro, técnico) ---- */
+.grafica {
+  margin-top: 24px;
+  padding: 18px;
+  color: #1a1c22;
+  background: #ffffff;
+  border: 1px solid #e6e8ef;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.grafica__titulo {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1c22;
+}
+
+.grafica__sub {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* En columnas angostas se puede desplazar horizontalmente sin deformarse */
+.grafica__lienzo {
+  overflow-x: auto;
+}
+
+.grafica svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+}
+
+/* Trazos de la gráfica */
+.g-rejilla { stroke: #eef0f5; stroke-width: 1; }
+.g-eje { stroke: #b8becc; stroke-width: 1.5; }
+.g-recta { stroke: #16a34a; stroke-width: 2.5; }
+.g-ref { stroke: #c3c8d4; stroke-width: 1.5; stroke-dasharray: 4 4; }
+.g-ref--azul { stroke: #2563eb; stroke-dasharray: 3 3; opacity: 0.55; }
+.g-punto-ref { fill: #6b7280; }
+.g-punto { fill: #2563eb; stroke: #ffffff; stroke-width: 2.5; }
+
+/* Textos de la gráfica */
+.g-tick { fill: #9aa1b1; font-size: 11px; }
+.g-tick--y { text-anchor: end; }
+.g-tick--x { text-anchor: middle; }
+.g-eje-titulo { fill: #4b5563; font-size: 12px; font-weight: 600; text-anchor: middle; }
+.g-q-ref { fill: #6b7280; font-size: 11px; text-anchor: middle; }
+.g-q-punto { fill: #2563eb; font-size: 12.5px; font-weight: 700; text-anchor: middle; }
+.g-lim-nombre { fill: #374151; font-size: 11px; font-weight: 600; text-anchor: middle; }
+.g-lim-valor { fill: #6b7280; font-size: 11px; text-anchor: middle; }
+
+/* Leyenda y notas técnicas */
+.notas {
+  margin-top: 16px;
+  padding: 16px;
+  color: #374151;
+  background: #ffffff;
+  border: 1px solid #e6e8ef;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.notas__leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.notas__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.notas__swatch {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: 4px;
+}
+
+.notas__swatch--recta { background: #16a34a; }
+.notas__swatch--punto { background: #2563eb; }
+.notas__swatch--ref { background: #6b7280; }
+
+.notas h3 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: #1a1c22;
+}
+
+.notas p {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.notas p:last-child {
+  margin-bottom: 0;
+}
+
+.notas cite {
+  color: #6b7280;
+}
+
 /* ---- Barra inferior de unidades ---- */
 .unit-bar {
   position: fixed;

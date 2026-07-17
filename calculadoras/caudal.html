@@ -32,8 +32,9 @@
   >
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
 
-  <!-- defer espera al HTML y respeta el orden: KaTeX, motor y luego la calculadora -->
+  <!-- defer espera al HTML y respeta el orden: KaTeX, motor, gráfica y calculadora -->
   <script src="../js/units.js" defer></script>
+  <script src="../js/grafica-caudal.js" defer></script>
   <script src="../js/caudal.js" defer></script>
 </head>
 
@@ -97,6 +98,44 @@
 
     <!-- Resultado -->
     <p id="resultado" aria-live="polite"></p>
+
+    <!-- Gráfica velocidad–caudal (se muestra tras el primer cálculo) -->
+    <section id="grafica" class="grafica" hidden>
+      <h2 class="grafica__titulo">Velocidad vs Caudal</h2>
+      <p class="grafica__sub">
+        Relación Q–V para el diámetro indicado, con los límites normativos.
+      </p>
+      <div id="grafica-lienzo" class="grafica__lienzo"></div>
+    </section>
+
+    <!-- Leyenda y notas técnicas -->
+    <aside id="grafica-notas" class="notas" hidden>
+      <div class="notas__leyenda">
+        <span class="notas__item">
+          <span class="notas__swatch notas__swatch--recta"></span> Relación V–Q (d fijo)
+        </span>
+        <span class="notas__item">
+          <span class="notas__swatch notas__swatch--punto"></span> Resultado calculado
+        </span>
+        <span class="notas__item">
+          <span class="notas__swatch notas__swatch--ref"></span> Límites de referencia
+        </span>
+      </div>
+
+      <h3>Notas técnicas</h3>
+      <p>
+        <strong>CONAGUA (2007)</strong> establece 0.30 m/s como velocidad mínima en
+        conductos a presión, 3.00 m/s como máxima para concreto simple hasta 45 cm, y
+        5.00 m/s como máxima para acero, acero galvanizado, asbesto cemento, fierro
+        fundido, hierro dúctil, PEAD y PVC, suponiendo resueltos los fenómenos
+        transitorios.
+      </p>
+      <p>
+        <cite>Impact of network sectorisation on water quality management</cite> (2018)
+        usa 0.06 m/s como referencia mínima para evitar sedimentación, y menciona
+        velocidades periódicas de 0.20 a 0.25 m/s para autolimpieza.
+      </p>
+    </aside>
   </main>
 </body>
 </html>

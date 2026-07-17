@@ -171,6 +171,8 @@ function construirBarra(magnitudes, unidadActual, alCambiar) {
 //    },
 //    // recibe las entradas YA en unidad base y devuelve las salidas en unidad base
 //    calcular(entradasEnBase) { return { clave: valorEnBase }; },
+//    // (opcional) se llama tras cada cálculo válido, con todo en base (SI)
+//    alCalcular(entradasEnBase, salidasEnBase) { ... },
 //  }
 function crearCalculadora(config) {
   const form = document.querySelector(config.form);
@@ -239,6 +241,10 @@ function crearCalculadora(config) {
 
     salida.textContent = partes.join(" · ");
     yaCalculado = true;
+
+    // Hook opcional: recibe entradas y salidas YA en base (SI) por si la
+    // calculadora quiere hacer algo extra (p. ej. dibujar una gráfica).
+    if (config.alCalcular) config.alCalcular(valores, resultados);
   }
 
   // Barra inferior: al cambiar una unidad recalcula (si ya hubo un resultado).
