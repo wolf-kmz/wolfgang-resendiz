@@ -13,7 +13,7 @@ crearCalculadora({
 
   // Salidas: qué devuelve y con qué etiqueta.
   salidas: {
-    caudal: { magnitud: "caudal", etiqueta: "Caudal" },
+    caudal: { magnitud: "caudal", etiqueta: "Caudal (Q)" },
   },
 
   // Recibe las entradas YA en unidad base (SI) y devuelve la salida en base.

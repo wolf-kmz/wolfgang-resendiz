@@ -181,6 +181,15 @@ function crearCalculadora(config) {
 
   let yaCalculado = false;
 
+  // Actualiza los indicadores de unidad junto a los inputs.
+  // Cualquier elemento con data-unidad="<magnitud>" muestra su unidad actual.
+  function actualizarIndicadores() {
+    document.querySelectorAll("[data-unidad]").forEach((el) => {
+      const magnitud = el.dataset.unidad;
+      if (unidadActual[magnitud]) el.textContent = unidadActual[magnitud];
+    });
+  }
+
   // Lee las entradas y las convierte a base; devuelve { error } si algo no es válido.
   function leerEntradas() {
     const base = {};
@@ -217,9 +226,11 @@ function crearCalculadora(config) {
   const barra = construirBarra(magnitudes, unidadActual, (magnitud, unidad) => {
     unidadActual[magnitud] = unidad;
     guardarPref(magnitud, unidad);
+    actualizarIndicadores();
     if (yaCalculado) recalcular({ silencioso: true });
   });
   document.body.appendChild(barra);
+  actualizarIndicadores();
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
