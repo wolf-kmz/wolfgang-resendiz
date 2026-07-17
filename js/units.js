@@ -261,6 +261,9 @@ function crearCalculadora(config) {
     event.preventDefault();
     recalcular({ silencioso: false });
   });
+
+  // Recalcula en vivo mientras se escribe (sin mostrar el error de validación).
+  form.addEventListener("input", () => recalcular({ silencioso: true }));
 }
 
 // Expuesto globalmente para las calculadoras.

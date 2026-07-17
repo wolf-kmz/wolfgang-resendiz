@@ -1,4 +1,22 @@
 // crearCalculadora viene de units.js (cargado antes en el HTML).
+
+// Fija una velocidad (en m/s) en el campo, convirtiéndola a la unidad activa,
+// y dispara el recálculo (que a su vez redibuja la gráfica). La usa la gráfica
+// interactiva al arrastrar el punto o mover el slider.
+function fijarVelocidadMs(vMs) {
+  const campo = document.querySelector("#velocidad");
+  if (!campo || !window.UNIDADES) return;
+  const indicador = document.querySelector('[data-unidad="velocidad"]');
+  const unidad = indicador && indicador.textContent ? indicador.textContent : "m/s";
+  campo.value = window.UNIDADES.desdeBase(vMs, "velocidad", unidad).toFixed(3);
+  campo.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
+// Le pasa esa función a la gráfica para su interactividad.
+if (window.configurarGraficaCaudal) {
+  window.configurarGraficaCaudal({ alFijarVelocidad: fijarVelocidadMs });
+}
+
 // La calculadora solo DECLARA qué magnitudes usa y cómo calcula.
 // El motor arma la barra de unidades y hace todas las conversiones.
 crearCalculadora({

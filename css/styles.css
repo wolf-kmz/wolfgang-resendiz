@@ -350,6 +350,42 @@ button:active {
 .g-punto-ref { fill: #6b7280; }
 .g-punto { fill: #2563eb; stroke: #ffffff; stroke-width: 2.5; }
 
+/* Capa de interacción: línea guía + tooltip */
+.g-hover-linea { stroke: #2563eb; stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.6; }
+.g-hover-pt { fill: #2563eb; opacity: 0.75; }
+.g-hover-caja { fill: #1a1c22; opacity: 0.92; }
+.g-hover-txt { fill: #ffffff; font-size: 11px; }
+
+/* Control (slider) de la gráfica */
+.grafica__control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.grafica__control label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.grafica__control input[type="range"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.grafica__control output {
+  min-width: 84px;
+  font-weight: 700;
+  color: #2563eb;
+  text-align: right;
+  white-space: nowrap;
+}
+
 /* Textos de la gráfica */
 .g-tick { fill: #9aa1b1; font-size: 11px; }
 .g-tick--y { text-anchor: end; }
