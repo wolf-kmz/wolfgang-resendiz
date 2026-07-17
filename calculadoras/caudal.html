@@ -41,9 +41,23 @@
 
     <h1>Calculadora de caudal en tuberías</h1>
 
+    <!-- Descripción breve y ecuación -->
+    <section class="info">
+      <p class="info__texto">
+        Calcula el caudal volumétrico <var>Q</var> de una tubería a partir de su
+        diámetro interior <var>d</var> y la velocidad media del fluido <var>v</var>.
+      </p>
+      <p class="info__ecuacion">
+        <var>Q</var> = (π ∕ 4) · <var>d</var><sup>2</sup> · <var>v</var>
+      </p>
+    </section>
+
     <!-- Formulario de cálculo -->
     <form id="caudal-form">
-      <label for="diametro">Diámetro</label>
+      <label for="diametro">
+        <span>Diámetro (<var>d</var>)</span>
+        <span class="label-unidad" data-unidad="longitud"></span>
+      </label>
 
       <input
         id="diametro"
@@ -55,7 +69,10 @@
         required
       >
 
-      <label for="velocidad">Velocidad</label>
+      <label for="velocidad">
+        <span>Velocidad (<var>v</var>)</span>
+        <span class="label-unidad" data-unidad="velocidad"></span>
+      </label>
 
       <input
         id="velocidad"
